@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Management</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="center">
+
+  <div class="card">
+
+    <!-- TITLE -->
+    <h2 style="color:#90caf9;">📝 Quiz Management</h2>
+    <p class="tagline">
+      Teacher defines questions and correct answers
+    </p>
+
+    <!-- SELECT EXPERIMENT -->
+    <div class="section">
+      <span class="section-title" style="color:#81c784;">🧪 Select Experiment</span>
+      <select id="experimentSelect" style="
+        width:100%;
+        padding:10px;
+        border-radius:10px;
+        border:none;
+        font-size:0.9rem;
+      ">
+        <option>Acid–Base Titration</option>
+        <option>Redox Titration</option>
+        <option>Estimation of Oxalic Acid</option>
+        <option>Estimation of NaOH</option>
+        <option>Estimation of Ferrous Sulphate</option>
+        <option>Estimation of FAS</option>
+        <option>Organic Compound Preparation</option>
+      </select>
+    </div>
+
+    <!-- QUESTIONS CONTAINER -->
+    <div id="questionsContainer"></div>
+
+    <!-- QUIZ SETTINGS -->
+    <div class="section">
+      <span class="section-title" style="color:#64b5f6;">🎯 Quiz Settings</span>
+      <ul>
+        <li>Total Questions: <strong id="totalQ">0</strong></li>
+        <li>Marks per Question: <strong>1</strong></li>
+        <li>Total Marks: <strong id="totalMarks">0</strong></li>
+      </ul>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <button class="btn" onclick="addQuestion()">➕ Add Another Question</button>
+
+    <button class="btn" onclick="saveQuiz()" style="margin-top:10px;">
+      💾 Save Quiz & Answers
+    </button>
+
+    <a href="teacher-dashboard.html" class="btn" style="margin-top:10px;">
+      ⬅ Back to Dashboard
+    </a>
+
+  </div>
+
+<script>
+let questionCount = 0;
+
+/* Add Question */
+function addQuestion() {
+  questionCount++;
+
+  const container = document.getElementById("questionsContainer");
+
+  const div = document.createElement("div");
+  div.className = "section";
+  div.dataset.index = questionCount;
+
+  div.innerHTML = `
+    <span class="section-title" style="color:#ffcc80;">
+      Q${questionCount}. Enter Question
+    </span>
+
+    <input type="text" class="question-text" placeholder="Enter question here"
+      style="width:100%;padding:10px;border-radius:10px;border:none;margin-bottom:8px;">
+
+    <p style="font-size:0.85rem;opacity:0.8;">Enter options and select correct answer:</p>
+
+    <ul style="list-style:none;padding-left:0;">
+      ${[0,1,2,3].map(i => `
+        <li style="margin-bottom:6px;">
+          <input type="radio" name="correct${questionCount}" value="${i}">
+          <input type="text" class="option-text" placeholder="Option ${String.fromCharCode(65+i)}"
+            style="width:75%;padding:6px;">
+        </li>
+      `).join("")}
+    </ul>
+  `;
+
+  container.appendChild(div);
+
+  updateQuizStats();
+}
+
+/* Update quiz stats */
+function updateQuizStats() {
+  document.getElementById("totalQ").innerText = questionCount;
+  document.getElementById("totalMarks").innerText = questionCount;
+}
+
+/* Save Quiz */
+function saveQuiz() {
+  const questions = [];
+  const blocks = document.querySelectorAll("#questionsContainer .section");
+
+  blocks.forEach((block, index) => {
+    const question = block.querySelector(".question-text").value;
+    const options = Array.from(block.querySelectorAll(".option-text")).map(o => o.value);
+    const correctInput = block.querySelector(`input[name="correct${index+1}"]:checked`);
+
+    if (!question || options.includes("") || !correctInput) return;
+
+    questions.push({
+      question: question,
+      options: options,
+      correct: correctInput.value
+    });
+  });
+
+  if (questions.length === 0) {
+    alert("Please add at least one complete question.");
+    return;
+  }
+
+  const quizData = {
+    experiment: document.getElementById("experimentSelect").value,
+    questions: questions
+  };
+
+  localStorage.setItem("quizData", JSON.stringify(quizData));
+  alert("Quiz saved successfully!");
+}
+
+/* Add first question by default */
+addQuestion();
+</script>
+
+</body>
+</html>

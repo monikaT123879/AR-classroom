@@ -1,0 +1,226 @@
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- BODY ---------- */
+body {
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url("https://cdn.pixabay.com/photo/2024/03/19/13/40/ai-generated-8643329_1280.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+}
+
+/* Soft vignette for depth */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(0,0,0,0.15),
+    rgba(0,0,0,0.55)
+  );
+  pointer-events: none;
+}
+
+/* ---------- CENTER ALIGN ---------- */
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* ---------- CARD ---------- */
+.card {
+  background: rgba(30, 30, 30, 0.65);
+  padding: 40px 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  width: 90%;
+  max-width: 400px;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: fadeUp 0.9s ease;
+}
+
+/* ---------- CARD SCROLLBAR ---------- */
+.card::-webkit-scrollbar {
+  width: 4px;
+}
+.card::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+/* ---------- HEADINGS ---------- */
+.title {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  font-size: 1rem;
+  margin-bottom: 25px;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* ---------- BUTTON ---------- */
+.btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #1a73e8, #4285f4);
+  color: white;
+  text-decoration: none;
+  border-radius: 28px;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 6px 16px rgba(26, 115, 232, 0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(26, 115, 232, 0.6);
+}
+
+/* ---------- ROLE BUTTON SPACING ---------- */
+.center a {
+  margin: 10px 0;
+}
+
+/* ---------- GRID (EXPERIMENT LIST) ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ---------- EXPERIMENT CARD ---------- */
+.subject-card {
+  background: rgba(255, 255, 255, 0.18);
+  padding: 22px 15px;
+  border-radius: 14px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.subject-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+}
+
+.icon {
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+}
+
+.subject-card p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.section p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.95;
+}
+
+.section ul,
+.section ol {
+  font-size: 0.9rem;
+  padding-left: 18px;
+  line-height: 1.5;
+}
+
+.section li {
+  margin-bottom: 4px;
+}
+
+/* ---------- AR VIEW CONTROLS ---------- */
+.ar-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 14px;
+  z-index: 10;
+}
+
+.ar-controls button {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: #1a73e8;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  cursor: pointer;
+}
+
+.ar-controls button:hover {
+  background: #0f5bd8;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

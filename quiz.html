@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemistry Quiz</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="center">
+
+  <div class="card">
+
+    <!-- TITLE -->
+    <h2 style="color:#90caf9;">📝 Experiment Quiz</h2>
+    <p class="tagline" id="quizTitle">
+      Loading quiz...
+    </p>
+
+    <!-- QUIZ QUESTIONS -->
+    <div id="quizContainer"></div>
+
+    <!-- SUBMIT BUTTON -->
+    <button class="btn" onclick="submitQuiz()" style="margin-top:15px;">
+      ✅ Submit Quiz
+    </button>
+
+    <!-- RESULT -->
+    <div id="resultSection" class="section" style="display:none;">
+      <span class="section-title" style="color:#64b5f6;">📊 Quiz Result</span>
+      <p id="scoreText"></p>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <a href="student-progress.html" class="btn" style="margin-top:10px;">
+      📈 View My Progress
+    </a>
+
+    <a href="student-dashboard.html" class="btn" style="margin-top:10px;">
+      ⬅ Back to Dashboard
+    </a>
+
+  </div>
+
+<script>
+/* Load quiz from localStorage */
+const quizData = JSON.parse(localStorage.getItem("quizData"));
+const quizContainer = document.getElementById("quizContainer");
+const quizTitle = document.getElementById("quizTitle");
+
+if (!quizData) {
+  quizContainer.innerHTML = "<p>No quiz available.</p>";
+} else {
+  quizTitle.innerText = quizData.experiment + " (Assessment)";
+
+  quizData.questions.forEach((q, index) => {
+    const div = document.createElement("div");
+    div.className = "section";
+
+    div.innerHTML = `
+      <span class="section-title" style="color:#81c784;">
+        Q${index + 1}. ${q.question}
+      </span>
+      <ul style="list-style:none;padding-left:0;">
+        ${q.options.map((opt, i) => `
+          <li style="margin-bottom:6px;">
+            <input type="radio" name="q${index}" value="${i}"> ${opt}
+          </li>
+        `).join("")}
+      </ul>
+    `;
+
+    quizContainer.appendChild(div);
+  });
+}
+
+/* Evaluate quiz */
+function submitQuiz() {
+  let score = 0;
+
+  quizData.questions.forEach((q, index) => {
+    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+    if (selected && selected.value == q.correct) {
+      score++;
+    }
+  });
+
+  document.getElementById("resultSection").style.display = "block";
+  document.getElementById("scoreText").innerHTML = `
+    Score: <strong>${score} / ${quizData.questions.length}</strong><br>
+    Status: <strong style="color:${score >= quizData.questions.length / 2 ? '#4caf50' : '#f44336'};">
+      ${score >= quizData.questions.length / 2 ? 'Passed' : 'Needs Improvement'}
+    </strong>
+  `;
+}
+</script>
+
+</body>
+</html>

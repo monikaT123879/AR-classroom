@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="center">
+
+  <div class="card">
+
+    <!-- HEADER -->
+    <h2 style="color:#90caf9;">🎓 Student Dashboard</h2>
+    <p class="tagline">Class 12 – Chemistry Practical (AR Lab)</p>
+
+    <!-- PROFILE -->
+    <div class="section" style="text-align:center;">
+      <img 
+        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+        alt="Student Profile"
+        style="width:70px; border-radius:50%; margin-bottom:8px;"
+      >
+      <p><strong>Student Name</strong></p>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="section">
+      <span class="section-title" style="color:#ffcc80;">📊 Overall Progress</span>
+
+      <div style="
+        background:rgba(255,255,255,0.2);
+        border-radius:10px;
+        overflow:hidden;
+        height:10px;
+        margin-top:6px;
+      ">
+        <div style="
+          width:60%;
+          background:#34a853;
+          height:100%;
+        "></div>
+      </div>
+
+      <p style="font-size:0.85rem; margin-top:6px;">
+        3 of 7 experiments completed
+      </p>
+    </div>
+
+    <!-- STATS -->
+    <div class="section">
+      <span class="section-title" style="color:#81c784;">📈 Learning Stats</span>
+      <ul>
+        <li>Completed: <strong>3</strong></li>
+        <li>Pending: <strong>4</strong></li>
+        <li>Average Quiz Score: <strong>78%</strong></li>
+      </ul>
+    </div>
+
+    <!-- BADGES -->
+    <div class="section">
+      <span class="section-title" style="color:#64b5f6;">🏅 Badges</span>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <span style="
+          background:#34a853;
+          padding:6px 10px;
+          border-radius:14px;
+          font-size:0.8rem;
+        ">✔ Acid–Base</span>
+
+        <span style="
+          background:#34a853;
+          padding:6px 10px;
+          border-radius:14px;
+          font-size:0.8rem;
+        ">✔ Redox</span>
+
+        <span style="
+          background:#fbbc04;
+          padding:6px 10px;
+          border-radius:14px;
+          font-size:0.8rem;
+        ">⏳ Oxalic Acid</span>
+
+        <span style="
+          background:#fbbc04;
+          padding:6px 10px;
+          border-radius:14px;
+          font-size:0.8rem;
+        ">⏳ FAS</span>
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <a href="experiments.html" class="btn">
+      ▶ Continue Learning
+    </a>
+
+    <a href="student-progress.html" class="btn" style="margin-top:10px;">
+      📈 View Detailed Progress
+    </a>
+
+  </div>
+
+</body>
+</html>
