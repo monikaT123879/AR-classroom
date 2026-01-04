@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AR Classroom</title>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+  <!-- AR.js -->
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+
+  <!-- 🔹 Custom Components (MUST be before scene) -->
+  <script src="js/camera.js"></script>
+  <script src="js/planeDetection.js"></script>
+  <script src="js/modelPlacement.js"></script>
+  <script src="js/uiControls.js"></script>
+</head>
+
+<body style="margin:0; overflow:hidden;">
+
+  <a-scene embedded arjs="sourceType: webcam;">
+    
+    <a-entity log-camera place-box></a-entity>
+    <a-camera></a-camera>
+
+  </a-scene>
+
+</body>
+</html>
