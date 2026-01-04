@@ -1,29 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR Classroom</title>
-
-  <!-- A-Frame -->
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-
-  <!-- AR.js -->
-  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-
-  <!-- 🔹 Custom Components (MUST be before scene) -->
-  <script src="js/camera.js"></script>
-  <script src="js/planeDetection.js"></script>
-  <script src="js/modelPlacement.js"></script>
-  <script src="js/uiControls.js"></script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
+<body class="center">
 
-<body style="margin:0; overflow:hidden;">
-
-  <a-scene embedded arjs="sourceType: webcam;">
-    
-    <a-entity log-camera place-box></a-entity>
-    <a-camera></a-camera>
-
-  </a-scene>
+  <div class="card">
+    <h1 class="title">AR Classroom</h1>
+    <p class="tagline">AR-Based Chemistry Practical Lab for Class 12
+</p>
+    <a href="role.html" class="btn">Start Learning</a>
+  </div>
 
 </body>
+
 </html>
