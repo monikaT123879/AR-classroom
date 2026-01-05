@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AR Chemistry Lab</title>
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+  <!-- AR.js -->
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+
+  <!-- Custom JS files -->
+  <script src="js/camera.js"></script>
+  <script src="js/planeDetection.js"></script>
+  <script src="js/uiControls.js"></script>
+  <script src="js/rotate.js"></script>
+  <script src="js/pour.js"></script>
+  <script src="js/modelPlacement.js"></script>
+</head>
+
+<body style="margin:0; overflow:hidden;">
+
+  <!-- Plane detected message -->
+  <div id="planeMsg"
+    style="
+      position: fixed;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      color: white;
+      background: rgba(0,0,0,0.6);
+      padding: 10px;
+      display: none;
+      z-index: 10;">
+    Plane Detected – Tap to place object
+  </div>
+
+  <!-- Object selection buttons -->
+  <div style="
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    z-index: 20;
+  ">
+    <button onclick="selectObject('beaker')">Beaker</button>
+    <button onclick="selectObject('testtube')">Test Tube</button>
+    <button onclick="selectObject('coppersulphate')">CuSO₄</button>
+    <button onclick="clearLab()">Clear Lab</button>
+  </div>
+
+  <!-- AR Scene -->
+  <a-scene
+    embedded
+    vr-mode-ui="enabled: false"
+    arjs="sourceType: webcam; debugUIEnabled: false;">
+
+    <!-- Assets -->
+    <a-assets>
+      <a-asset-item id="beakerModel" src="models/beaker.glb"></a-asset-item>
+      <a-asset-item id="testtubeModel" src="models/testtube.glb"></a-asset-item>
+      <a-asset-item id="cuso4Model" src="models/coppersulphate.glb"></a-asset-item>
+    </a-assets>
+
+    <!-- Invisible ground plane for tap detection -->
+    <a-plane
+      class="clickable"
+      position="0 -0.5 -1"
+      rotation="-90 0 0"
+      width="10"
+      height="10"
+      visible="false">
+    </a-plane>
+
+    <!-- Logic entity -->
+    <a-entity
+      detect-plane
+      place-model
+      ui-controls>
+    </a-entity>
+
+    <!-- Camera with cursor + raycaster -->
+    <a-camera>
+      <a-cursor
+        raycaster="objects: .clickable"
+        fuse="false">
+      </a-cursor>
+    </a-camera>
+
+  </a-scene>
+
+</body>
+</html>
